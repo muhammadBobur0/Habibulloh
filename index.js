@@ -1,6 +1,9 @@
+const express = require('express')
 const { readFileSync, writeFileSync } = require('fs');
+const app = express()
 const { resolve } = require('path');
 const cors = require('cors');
+app.use(cors())
 const PORT = process.env.PORT || 3000;
 const TelegramBot = require('node-telegram-bot-api');
 
