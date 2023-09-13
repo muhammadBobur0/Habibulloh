@@ -3,9 +3,13 @@ const { readFileSync, writeFileSync } = require('fs');
 const app = express()
 const { resolve } = require('path');
 const cors = require('cors');
-app.use(cors())
+app.use(cors({
+	origin :"*"
+}))
+app.use(express.json())
 const PORT = process.env.PORT || 3000;
 const TelegramBot = require('node-telegram-bot-api');
+const event = new Date();
 
 const telegramBot = new TelegramBot(
 	'6377025383:AAHcdFRUIByuX1Bs97YjVcOOSLA6khyGv9E',
@@ -34,7 +38,7 @@ FIO:   ${messageOptions.fio || none}
 
 telefon: ${messageOptions.tel || none}
 
-sana :   ${DateDate.toLocaleString('en-GB', {
+sana :   ${event.toLocaleString('en-GB', {
 				hour12: false,
 			})}
 
@@ -63,7 +67,7 @@ app.post('/send', async (req, res) => {
 		data.push({
 			id: data[data.length - 1].id + 1 || 1,
 			...messageOptions,
-			sana: Date.toLocaleString('en-GB', {
+			sana: event.toLocaleString('en-GB', {
 				hour12: false,
 			}),
 		});
