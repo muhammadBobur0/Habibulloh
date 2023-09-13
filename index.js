@@ -38,7 +38,9 @@ FIO:   ${messageOptions.fio || none}
 
 telefon: ${messageOptions.tel || none}
 
-sana :   ${Date.now()}
+sana :   ${DateDate.toLocaleString('en-GB', {
+    hour12: false,
+  })}
 
 shahar:   ${messageOptions.shahar || none}
 
@@ -61,7 +63,9 @@ app.post('/send', async (req, res) => {
         
         let data = JSON.parse(readFileSync(resolve('database', 'cars' + '.json'), 'utf-8'))
         
-        data.push({id: data[data.length - 1].id + 1 || 1,...messageOptions, sana: Date.now()})
+        data.push({id: data[data.length - 1].id + 1 || 1,...messageOptions, sana: Date.toLocaleString('en-GB', {
+            hour12: false,
+          })})
         writeFileSync(resolve('database', "cars" + '.json'), JSON.stringify(data, null, 4))
         res.send({})
     } catch (error) {
